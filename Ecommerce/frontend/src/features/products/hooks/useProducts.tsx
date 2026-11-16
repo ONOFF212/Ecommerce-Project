@@ -2,16 +2,7 @@
 'use client';
 import {useState, useEffect} from 'react';
 import { searchProducts } from '@/features/products/services/product-api';
-
-interface productsDetails{
-    id:number;
-    imgUrl:string;
-    name:string;
-    stock:number;
-    price:number;
-    description:string;
-    category:string;
-}
+import { productsDetails } from '../types/product';
 
 interface productsFilters{
     search?:string;

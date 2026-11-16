@@ -10,7 +10,8 @@
   gap: 0px;
   background: #f5f7fB;
   font-family: "Inter", "serif";
-  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -21,9 +22,8 @@
   min-height: 0;
   grid-area: nav;
   padding:16px 20px;
-  background: #131212;
+  background: #31a6c4;
   border:1px solid #DBE1EA;
-  border-radius:10px;
   color: #ffff;
 }
 
@@ -32,15 +32,12 @@
   grid-area: aside;
   border-right: 1px solid #DBE1EA;
   background: #ffff;
-  border-radius: 10px;
-  margin-left: 8px;
   padding:16px 20px;
+  min-width: 0;
 }
 
 .product-view{
   grid-area: main;
-  border-left: 1px solid #DBE1EA;
-  border-radius: 10px;
   background: #ffff;
   min-width: 0;
   min-height: 0;

@@ -7,7 +7,7 @@ import "../auth-style.css";
 
 import { useRouter } from "next/navigation";
 import {useForm} from 'react-hook-form';
-import { signupUser } from "@/features/auth/service/auth-api";
+import { signupUser } from '@/features/auth/services/auth-api';
 export default  function RegisterPage() {
     const router = useRouter();
 
@@ -34,7 +34,9 @@ export default  function RegisterPage() {
         }
     };
     
-    return(
+     return(
+          <div>
+          
         <div className="form-container">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h1 className="font-bold text-center text-2xl mt-4">Sign Up</h1>
@@ -43,6 +45,7 @@ export default  function RegisterPage() {
                     <input 
                         id="name" 
                         type="text" 
+                         autoComplete="name"
                         placeholder="user name"
                         {...register("name",{required:true})}
                     />
@@ -56,6 +59,7 @@ export default  function RegisterPage() {
                     <label htmlFor="email">E-mail</label>
                     <input 
                         id="email" 
+                         autoComplete="email"
                         type="email" 
                         placeholder="example123@gmail.com"
                         {...register("email",{required:true})}
@@ -69,7 +73,8 @@ export default  function RegisterPage() {
                 <div>
                     <label htmlFor="password">Password</label>
                     <input 
-                        id="password" 
+                        id="password"
+                        autoComplete="password" 
                         type="password" 
                         placeholder="#123DSrtEUri@"
                         {...register("password" ,{required:true})} 
@@ -84,6 +89,7 @@ export default  function RegisterPage() {
                     <label htmlFor="confirmPassword">confirm-password</label>
                     <input 
                         id="confirmPassword" 
+                         autoComplete="password"
                         type="password" 
                         placeholder="#123DSrtEUri"
                         {...register("confirmPassword",{required:true})}
@@ -104,5 +110,6 @@ export default  function RegisterPage() {
                 </div>
             </form>
         </div>
-    );
+        </div>
+     );
 };

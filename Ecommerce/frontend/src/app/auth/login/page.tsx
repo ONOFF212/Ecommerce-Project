@@ -6,7 +6,7 @@ import { loginSchema, loginInput } from "@/features/auth/types/user";
 import Link from "next/link";
 import '../auth-style.css'
 import { useRouter } from "next/navigation";
-import { loginUser } from "@/features/auth/service/auth-api";
+import { loginUser } from "@/features/auth/services/auth-api";
 import { useAuth } from "@/contexts/auth/AuthContext";
 
 export default function LoginPage() {
@@ -49,6 +49,7 @@ export default function LoginPage() {
                     <div>
                         <label>E-mail</label>
                         <input type="email"
+                        autoComplete="email"
                         placeholder="example123@gmail.com"
                         {...register("email", {required:true})}/>
                         {errors.email && (
@@ -60,6 +61,7 @@ export default function LoginPage() {
                     <div>
                         <label>Password</label>
                         <input type="password"
+                        autoComplete="password"
                         placeholder="#123DSrtEUri@"
                         {...register("password", {required:true})}></input>
                         {errors.password && (
@@ -72,12 +74,12 @@ export default function LoginPage() {
                         <button type="submit">Log In</button>
                     </div>
                     <div className="text-center font-semibold">
-                        <p>Don&apost have an account?
+                        <p>{"Don't have an account?"}
                         <Link href="/auth/register" className="text-blue-400 transition:0.5"> Register</Link>
                         </p>
                     </div>
                     <div className="text-center font-semibold mt-4 text-sm">
-                        <Link href="/auth/forget" className="text-blue-400 text-underline"> Forget Password!</Link>
+                        <Link href="/auth/forgot" className="text-blue-400 text-underline"> Forgot Password!</Link>
                     </div>
                 </form>
             </div>

@@ -25,7 +25,7 @@ export default function  SortProducts({onSortChange}:sortProps){
 
     return(
         <div className="flex justify-end w-full">
-                  <div className="  inline-flex font-mono mt-1 text-center rounded-lg outline-none  ">
+                  <div className="inline-flex font-mono mt-1 text-center rounded-lg outline-none">
                       <select id="sort-selection"
                               onChange={handleSort}
                               defaultValue="" 
@@ -33,11 +33,11 @@ export default function  SortProducts({onSortChange}:sortProps){
                         <option value="">sort ☷ </option>
                         <option value="price-low">
                             Low - High
-                        </option>  {/* 1, 2, 3, 4 */}
+                        </option>
 
                         <option value="price-high">
                             High - Low
-                        </option>  {/*  9, 8, 7, 2, 1 */}
+                        </option>
 
                         <option value="name-az">
                             A - Z

@@ -1,9 +1,16 @@
 
-import Router from "@koa/router"
+import Router from "@koa/router";
+import { RateLimit } from "koa2-ratelimit";
 
 import { signup, login } from "../controllers/auth-controller.ts";
 
 export const authRouter = new Router({prefix:'/public'});
 
-authRouter.post('/register', signup);
-authRouter.post('/login', login);
+const authLimiter = RateLimit.middleware({
+    interval: 15 * 60 * 1000,
+    max:10,
+    message:"Too many Request Try after few minutes",
+})
+
+authRouter.post('/register',authLimiter, signup);
+authRouter.post('/login',authLimiter, login);

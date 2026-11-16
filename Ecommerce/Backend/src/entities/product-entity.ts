@@ -36,16 +36,15 @@ export class Product{
     @JoinColumn()
     category:Category;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select:false })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select:false })
     updatedAt: Date;
    
-    @DeleteDateColumn({ nullable: true })
+    @DeleteDateColumn({ nullable: true ,select:false })
     deletedAt: Date | null;
 
 };
-
 
 

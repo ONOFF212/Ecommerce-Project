@@ -1,68 +1,85 @@
-/* eslint-disable @next/next/no-img-element */
 
 'use client';
 import { useRouter } from "next/navigation";
+import { FaCartPlus } from "react-icons/fa6";
+import { Card, Image, Text, Stack, Button, Group, Badge } from "@mantine/core";
 
-//import { ShoppingCart } from "../../../components/shared/ShoppingCart";
 
-
-interface productDetail {
-    id:number;
-    imgUrl:string;
-    name:string;
-    stock:number;
-    price:number;
-    description:string;
-    category:string;
-}
+import { createCartItem } from "@/features/dashboard/shoppingCart/services/cart-api";
+import { useAuth } from "@/contexts/auth/AuthContext";
+import { productsDetails } from "../types/product";
 
 interface productDetailProps {
-    product : productDetail;
+    product : productsDetails;
 }
 
 
 const URL = process.env.NEXT_PUBLIC_API_URL;
 export function ProductCard({product}:productDetailProps) {
     const router = useRouter();
+    const { isAuthenticated } = useAuth();
+
+    const handleCart = async() =>{
+        if(!isAuthenticated){
+            router.push("/auth/login");
+            return;
+        }
+
+        await createCartItem({quantity:1, product_id:product.id}); 
+        window.location.reload();
+    };
 
     const handleViewProduct = async() => {
-        router.push(`/products/views/${product.id}`);
+        router.push(`/products/${product.id}`);
     };
 
     return(
-        <div className="grid h-[330px] grid-rows-[160px_1fr_auto] overflow-hidden rounded-lg border border-slate-200 bg-white hover:shadow-md " onClick={handleViewProduct} >
-           <div className="flex items-center justify-center " >
-             <img src={`${URL}/uploads/${product.imgUrl}`} 
-                 alt={product.imgUrl}  
-                 className='mt-8 h-50 w-full py-4 object-contain'
+        <Card
+              shadow="sm" padding='md' radius='md' h={350} style={{display:'grid', gridTemplateRows:'160px 1fr', overflow:'hidden', cursor:'pointer', transition:'box-shadow 0.2s ease',}}
+              onClick={handleViewProduct}
+              onMouseEnter={(e) => {e.currentTarget.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)';}}
+              onMouseLeave={(e) => {e.currentTarget.style.boxShadow="";}}
+        >
+            <Image
+                src={`${URL}/uploads/${product.imgUrl}`}
+                alt={product.imgUrl}
+                fit="contain"
+                h={160}
+                w='100%'
+                p='md'
             />
-           </div>
-           <div className="min-h-0 overflow-y-hidden px-3 py-10">
-                <h3 className='mb-2 font-semibold text-gray-800'>
-                    {product.name}
-                </h3>
-            
-                <p className="text-sm text-black text-justify ">
+
+            <Stack gap={8} justify="space-between" style={{overflow:"hidden", flex:1, minHeight:0}}>
+                <Group justify="space-between">
+                    <Text fw={600} c='dark' lineClamp={1}>
+                        {product.name}
+                    </Text>
+                    <Text component="div" fw={600} c='dimmed' size="xs" lineClamp={1}>
+                        <Badge  variant="light"  radius="md" size="sm">
+                            {product.category.name}
+                        </Badge>
+                    </Text>
+                </Group>
+                <Text size="sm" c='black' lineClamp={3}>
                     {product.description}
-                </p>
-                <p className='mt-2 text-sm font-bold '>
-                    Price: {product.price}
-                </p>
-                {/* <p className='text-sm font-bold text-red-600'>
-                    Stock: {product.stock}
-                </p> */}
-                 {/* <div>
-                    <ShoppingCart />
-                </div> */}
-            </div>
-            {/* <div className="bg-white p-3">
-                <button className="w-full bg-black text-white font-bold rounded-3xl p-2 hover:bg-yellow-400 hover:text-black"
-                        name="view"
-                        
-                >
-                    View
-                </button>
-            </div> */}
-        </div>
+                </Text>
+                <Group justify="space-between" >
+                    <Text size="sm" fw={700}>
+                        Price:{product.price} 
+                    </Text>
+                    <Button
+                            justify="end"
+                            color="#31a6c4"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleCart();}}
+                            mt='sm'
+                        >
+                            <FaCartPlus style={{marginRight:8}}/>
+                            Add-to-Cart
+                        </Button>
+                </Group>
+            </Stack>
+        </Card>
     );
 };

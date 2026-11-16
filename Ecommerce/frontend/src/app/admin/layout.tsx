@@ -6,13 +6,13 @@ import AdminHeader from "@/features/admin/components/AdminHeader";
 import { AdminSideBar } from "@/features/admin/components/AdminSidebar";
 import { AdminFooter } from "@/features/admin/components/AdminFooter";
 
-import AuthGuard from "@/contexts/auth/AuthGuard";
-import { AuthProvider } from "@/contexts/auth/AuthContext";
+// import AuthGuard from "@/contexts/auth/AuthGuard";
+// import { AuthProvider } from "@/contexts/auth/AuthContext";
 
 export default function AdminLayout({children}:{children : ReactNode}){
     return(
-        <AuthProvider>
-            <AuthGuard>
+//         <AuthProvider>
+//             <AuthGuard>
                 <div className="admin-layout">
                     <div className="admin-header">
                         <div>
@@ -32,7 +32,7 @@ export default function AdminLayout({children}:{children : ReactNode}){
                         <AdminFooter />
                     </div>
                 </div>
-            </AuthGuard>
-        </AuthProvider>
+//             </AuthGuard>
+//         </AuthProvider>
     );
 };

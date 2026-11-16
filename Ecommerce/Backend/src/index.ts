@@ -21,6 +21,8 @@ import { userRouter } from './routes/user-routes.ts';
 import { seedDatabase } from './seeds/products-seed.ts'
 import { seedDbRole } from './seeds/role-seed.ts';
 
+import { orderRouter } from './routes/order-routes.ts';
+import { cartRouter } from './routes/cart-routes.ts';
 
 const app = new Koa();
 
@@ -47,6 +49,8 @@ app.use(userRouter.routes());
 app.use(adminCategoryRouter.routes());
 app.use(adminProductRouter.routes());
 app.use(roleRouter.routes());
+app.use(orderRouter.routes());
+app.use(cartRouter.routes());
 
 const startServer = async () => {
     try {
