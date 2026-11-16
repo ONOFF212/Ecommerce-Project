@@ -13,9 +13,17 @@
 # testing
 /coverage
 
+
+/Frontend
 # next.js
+.next/
 /.next/
 /out/
+
+# Ignore generated JavaScript files
+/dist
+/build
+/lib
 
 # production
 /build
