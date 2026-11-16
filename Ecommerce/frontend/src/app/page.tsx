@@ -1,22 +1,20 @@
-
 "use client"
-import Header from "@/components/commonComponents/header";
-import Mainnavbar from "@/components/navbars/homeNavbars";
-import Footer from "@/components/commonComponents/footer";
+// import Header from "@/components/commonComponents/header";
+// import Mainnavbar from "@/components/navbars/homeNavbars";
+import Footer from "@/components/layout/Footer";
 
-import { hooksProducts } from "@/hooks/productsHook";
-import {ProductsList} from "@/components/commonComponents/productList";
+import ProductPage from "@/app/products/page";
 
 
 export default function Home(){
-      const {products} = hooksProducts();
     return(
         <>
-        <Header />
-        <Mainnavbar />
+        {/* <Header /> */}
+        {/* <Mainnavbar /> */}
       <main>
         <div>
-          <ProductsList products={products}/>
+          {/* <ProductsList products={products}/> */}
+          <ProductPage />
         </div>
       </main>
         <Footer />

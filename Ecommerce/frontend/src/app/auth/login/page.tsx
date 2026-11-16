@@ -2,13 +2,15 @@
 "use client"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { loginSchema, loginInput } from "@/utils/formTypeCheck";
+import { loginSchema, loginInput } from "@/features/auth/types/user";
 import Link from "next/link";
-import '../authStyle.css'
+import '../auth-style.css'
 import { useRouter } from "next/navigation";
-import { loginUser } from "@/app/api/authApi/auth";
+import { loginUser } from "@/features/auth/service/auth-api";
+import { useAuth } from "@/contexts/auth/AuthContext";
 
 export default function LoginPage() {
+    const {login} = useAuth();
     const router = useRouter();
     const {register, handleSubmit, formState: { errors },} = useForm<loginInput>({
         resolver:zodResolver(loginSchema),
@@ -21,10 +23,18 @@ export default function LoginPage() {
     const onSubmit = async(data:loginInput) =>{
         try {
             const result = await loginUser(data);
-
-            if (result && result.user) {
-                router.push("/dashboard");
+            
+            if(result.user && result.Token){
+                login(result.user , result.Token);
+                if (result && result.user.roles.name === 'customer') {
+                    router.push("/dashboard");
+                }else if(result && result.user.roles.name === 'admin'){
+                    router.push("/admin");
+                }else{
+                    router.push('/auth/signup');
+                }
             }
+            
         } catch (error) {
             console.error("Registration failed:", error);
         }
@@ -62,7 +72,7 @@ export default function LoginPage() {
                         <button type="submit">Log In</button>
                     </div>
                     <div className="text-center font-semibold">
-                        <p>Don't have an account?
+                        <p>Don&apost have an account?
                         <Link href="/auth/register" className="text-blue-400 transition:0.5"> Register</Link>
                         </p>
                     </div>
