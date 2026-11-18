@@ -4,18 +4,18 @@ import { IoPeopleOutline } from "react-icons/io5";
 import { FaUserCheck } from "react-icons/fa";
 import { LuClock8 } from "react-icons/lu";
 import { LuSquareActivity } from "react-icons/lu";
-import { useAuth } from "@/contexts/auth/AuthContext";
+//import { useAuth } from "@/contexts/auth/AuthContext";
 
 
 export default function AdminPage(){
-   const {user} = useAuth();
+//    const {user} = useAuth();
     return(
         <div>
             <div className=" p-4 text-black font-mono ">
                 <h1 className="font-bold text-2xl">Dashboard</h1>
-                <p className="text-sm">Welcome back, <span className="text-xl font-bold font-mono">{user?.name}</span></p>
+                <p className="text-sm">Welcome back, <span className="text-xl font-bold font-mono">userName</span></p>
             </div>
-            
+            {/*replace with userName = {user?.name} */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 mx-30 mt-10 gap-8  ">
 
                 <div className="grid min-w-0 w-full min-h-0 h-full rounded-lg border border-slate-50  p-6 bg-black  ">

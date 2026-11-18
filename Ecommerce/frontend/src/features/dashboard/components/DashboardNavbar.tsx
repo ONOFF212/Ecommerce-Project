@@ -1,15 +1,59 @@
 
+"use client"
 import Link from "next/link";
+import { FaCartPlus } from "react-icons/fa6";
+import { Box, Group, Anchor } from "@mantine/core";
 
 export default function DashboardNavbar() {
     return (
-        <div className="fixed top-4 left-0 w-full flex items-center justify-center h-12 text-black px-4">
-            <div className="flex gap-4 font-bold">
-                <Link href="/products" className="hover:bg-blue-300 rounded-full p-2 hover:text-black">Product</Link>
-                <Link href="/dashboard/profile" className="hover:bg-blue-300 rounded-full p-2 hover:text-black">Profile</Link>
-                <Link href="/dashboard/shopping-cart" className="hover:bg-green-300 rounded-full p-2 hover:text-black">Shopping-Cart</Link>
-                <Link href="/dashboard/contact" className="hover:bg-green-300 rounded-full p-2 hover:text-black">Contact Us</Link>
-            </div>
-        </div>
+        <>
+        <Box  p="md" bg="#31a6c4" >
+            <Group justify="space-between">
+                <Anchor component={Link}
+                        href='/dashboard'
+                        c="white" fw={700} underline="never"
+                        className="!text-xl hover:!text-red-500 transition-all duration-200"
+                >
+                    Dashboard
+                </Anchor>
+                <Group>
+                    <Anchor component={Link}
+                        href='/products'
+                        c="white" fw={700} underline="never"
+                        className="hover:!text-black transition-all duration-200"
+                    >
+                        Products
+                    </Anchor>
+
+                    <Anchor component={Link}
+                        href='/dashboard/orders'
+                        c="white" fw={700} underline="never"
+                        className="hover:!text-black transition-all duration-200"
+                    >
+                        Order
+                    </Anchor>
+                    
+                    <Anchor component={Link}
+                        href='/dashboard/shopping-cart'
+                        c="white" fw={700} underline="never"
+                        className="hover:!text-black transition-all duration-200"
+                    >
+                        <Group gap={4}>
+                            <FaCartPlus size={20}/>
+                            <span>Cart</span>
+                        </Group>
+                    </Anchor>
+
+                    <Anchor component={Link}
+                            href='/dashboard/profile'
+                            c="white" fw={700} underline="never"
+                            className=" hover:!text-black transition-all duration-200"
+                    >
+                        Profile
+                    </Anchor>
+                </Group>
+            </Group>
+        </Box>
+        </>
     );
 };

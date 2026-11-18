@@ -94,7 +94,7 @@ export async function findProductById(id:number){
 };
 
 export async function updateProduct(id:number , {name, price, stock, description, imgUrl, categoryId} : CreateProduct){
-    return await productRepository.update(id, {name, price, stock, description, imgUrl, category:{id:categoryId}});
+    return await productRepository.save( {id:id,name, price, stock, description, imgUrl, category:{id:categoryId}});
 };
 
 export async function deleteProduct(id:number){

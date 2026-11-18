@@ -5,16 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import ProductsHooks from "@/features/products/hooks/useProducts";
-
-interface productsDetails {
-    id:number;
-    imgUrl:string;
-    name:string;
-    stock:number;
-    price:number;
-    description:string;
-    category:string;
-}
+import { productsDetails } from "../types/product";
 
 interface productsListProps {
     products:productsDetails[];
@@ -31,7 +22,7 @@ export  function ProductsList({products} : productsListProps){
                     <div key={index} className="border mt-1 mx-4  p-4  min-h-90  min-w-60 outline-none rounded-lg border-[#DBE1EA] shadow-md">
                     <Skeleton count={1} height={230} />  
                     <Skeleton count={3}  height={20}/> 
-                    <div className="mx-35">
+                    <div className="flex items-center justify-center">
                         <Skeleton count={1} height={30} width={100} />
                     </div>
                 </div>

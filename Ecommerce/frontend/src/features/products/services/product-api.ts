@@ -1,5 +1,5 @@
 
-import { GET_PRODUCT_API } from '../constant/constants';
+import { GET_PRODUCT_API } from '../constants/constants';
 const APIURL = process.env.NEXT_PUBLIC_API_URL;
 const productEndpoint = GET_PRODUCT_API;
 
@@ -20,8 +20,7 @@ export async function getProductById(id:number) {
     if(!response.ok) {
         throw new Error(`HTTP Error! Status: ${response.status}`);
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
 };
 
 interface productsFilters{
@@ -56,8 +55,6 @@ export async  function searchProducts(filters:productsFilters = {}) {
     if(!response.ok) {
         throw new Error(`HTTP Error! Status: ${response.status}`);
     }
-    const data = await response.json();
-    console.log(data);
-    return data;
+    return await response.json();
 };
 

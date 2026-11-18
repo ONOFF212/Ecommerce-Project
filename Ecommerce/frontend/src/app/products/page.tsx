@@ -1,10 +1,11 @@
 
 'use client'
-import { useState } from "react";
-import "./product-style.css";
-import SearchNavBar from "@/features/products/filters/ProductPageNavbar";
-import SideBar from "@/features/products/filters/ProductPageSidebar";
-import Pagination from "@/components/layout/Pagination";
+import { useState, useCallback } from "react";
+import './product-style.css';
+
+import SearchNavBar from "@/features/products/filters/Navbar";
+import SideBar from "@/features/products/filters/Sidebar";
+import Pagination from "@/components/Pagination";
 import SortProducts from "@/features/products/filters/SortProducts";
 import { ProductsList } from "@/features/products/components/ProductList";
 
@@ -14,10 +15,15 @@ export default function ProductPage(){
   const [filters, setFilters] = useState({ search:"", category:"", minPrice:0, maxPrice:0, sort:"", page:1, limit:8 });
 
   const {products, totalPages} = ProductsHooks(filters);
-  return (
-    <>
-    <div className="product-layout">
 
+  const handleFilterChange = useCallback((newFilters: { category: string; minPrice: number; maxPrice: number; sort?: string; }) => {
+                                        setFilters((prev) => ({
+                                          ...prev,
+                                          ...newFilters
+                                        }));
+                                      }, []);
+  return (
+   <div className="product-layout">
       <div className="nav-bar">
         <SearchNavBar onFilterChange={(newFilters) => 
                                         setFilters((prev) => ({
@@ -29,12 +35,7 @@ export default function ProductPage(){
       </div>
 
       <div className="side-bar">
-        <SideBar onFilterChange={(newFilters) =>
-                                    setFilters((prev) =>({
-                                      ...prev,
-                                      ...newFilters
-                                    }))
-                                }
+        <SideBar onFilterChange={handleFilterChange}
       />
       </div>
 
@@ -76,6 +77,5 @@ export default function ProductPage(){
         />
       </div>
     </div>
-    </>
   );
 };

@@ -31,7 +31,7 @@ export const adminCreateProduct = async (ctx:Context) =>{
 };
 
 export const getProducts = async (ctx:Context) =>{
-    const validatedQueryParams = await queryParmasSchema.validate(ctx.query);
+    const validatedQueryParams = await queryParmasSchema.validate(ctx.query, {abortEarly:false});
 
     const search = validatedQueryParams.search ? String(validatedQueryParams.search) : "";
     const category = validatedQueryParams.category ? String(validatedQueryParams.category) : "";

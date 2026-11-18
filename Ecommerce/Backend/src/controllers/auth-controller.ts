@@ -8,6 +8,8 @@ import { findRoleID } from '../services/role-service.ts'
 import { findUserByEmail, findUserById } from "../services/user-service.ts";
 import { loginSchema, userSignupSchema } from "../validators/auth-validator.ts";
 
+import { createCart } from "../services/cart-service.ts";
+
 
 export const signup = async(ctx:Context) => {
 
@@ -35,10 +37,11 @@ export const signup = async(ctx:Context) => {
         }
         return;
     }
-
+    
+    await createCart(user.id);
     const token = await generateToken({id:user.id ,name:user.name, email:user.email, role:{name:user.roles.name}});
 
-    ctx.set('Authorization', token);
+    //ctx.set('Authorization', token);
     ctx.body = {
         message:"User Created successfully......",
         user,

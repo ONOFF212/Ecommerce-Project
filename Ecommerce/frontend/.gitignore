@@ -49,6 +49,8 @@ yarn-error.log*
 # vercel
 .vercel
 
+
+postcss.config.cjs
 # typescript
 *.tsbuildinfo
 next-env.d.ts

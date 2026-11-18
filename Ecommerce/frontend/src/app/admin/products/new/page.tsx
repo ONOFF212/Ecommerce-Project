@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LuImagePlus } from "react-icons/lu";
 
-import { adminCreateProduct } from "@/features/admin/services/admin-product-api";
+import { adminCreateProduct } from "@/features/admin/products/services/admin-product-api";
 
 interface productDetail{
     name:string;

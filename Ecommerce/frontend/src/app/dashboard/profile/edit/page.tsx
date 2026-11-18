@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useRouter } from "next/navigation";
 import {useForm} from 'react-hook-form';
-import { updateUser } from "@/features/auth/service/auth-api";
+import { updateUser } from "@/features/auth/services/auth-api";
 export default  function RegisterPage() {
     const router = useRouter();
 
@@ -25,7 +25,7 @@ export default  function RegisterPage() {
             router.push("/dashboard/profile");
 
         } catch (error) {
-            console.error("Registration failed:", error);
+            throw new Error(`Registration failed:, ${error}`);
         }
     };
 

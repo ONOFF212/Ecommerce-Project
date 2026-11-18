@@ -1,6 +1,4 @@
 
-
-
 export function AdminFooter(){
     return(
         <div>
