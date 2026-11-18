@@ -33,7 +33,7 @@ export async function signupUser(data:signupInput) {
     const responseData = await response.json();
 
     if(!response.ok) {
-        throw new Error(await getErrorMessage(response));
+        await getErrorMessage(response);
     }
     
     
@@ -61,7 +61,7 @@ export async function loginUser(data:loginInput) {
         if (!response.ok) {
             alert(JSON.stringify(responseData.message) || "Login failed");
             alert("Email or Password doesn't Match");
-            throw new Error(await getErrorMessage(response));
+            await getErrorMessage(response);
         }
 
         if (responseData && responseData.user) {

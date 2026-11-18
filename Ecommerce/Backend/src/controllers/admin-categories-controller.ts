@@ -18,7 +18,7 @@ export const adminCreateCategory = async (ctx:Context) =>{
     const isCategory = await findCategoryByName(validatedData.name);
     if(!isCategory) {
         ctx.body ={
-            message:"category didn't found. Try another one",
+            message:"Failed",
         }
         return;
     }
@@ -27,7 +27,7 @@ export const adminCreateCategory = async (ctx:Context) =>{
 
     ctx.status = 201;
     ctx.body = {
-        message:"Category Created Successfully...."
+        message:"Success"
     }
 };
 
@@ -48,7 +48,7 @@ export const adminUpdateCategory = async (ctx:Context) =>{
     
     ctx.status = 200;
     ctx.body = {
-        message:"Category Updated Succesful",
+        message:"Success",
         updateCategory
     }
 
@@ -58,12 +58,12 @@ export const adminDeleteCategory = async (ctx:Context) =>{
     const isDeleted = await deleteCategory(ctx.params.id);
     if(isDeleted) {
         ctx.status = 200;
-        ctx.body = {message:"Category deleted"}
+        ctx.body = {message:"Success"}
         return;
     }
 
     ctx.status = 400
     ctx.body ={
-        message:"Failed to Delete . Try again...."
+        message:"Failed"
     }
 };         

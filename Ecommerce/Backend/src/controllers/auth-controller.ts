@@ -33,7 +33,7 @@ export const signup = async(ctx:Context) => {
     const user = await findByEmail(validatedUser.email);
     if(!user){
         ctx.body = {
-            message:"failed to create account",
+            message:"failed",
         }
         return;
     }
@@ -43,7 +43,7 @@ export const signup = async(ctx:Context) => {
 
     //ctx.set('Authorization', token);
     ctx.body = {
-        message:"User Created successfully......",
+        message:"Success",
         user,
         Token:token,
     }
@@ -72,14 +72,14 @@ export const login = async(ctx:Context) => {
     const user = await findByEmail(validatedLogin.email);
     if(!user){
         ctx.body = {
-            message:"failed to create account",
+            message:"Failed",
         }
         return;
     }
     const token = await generateToken({id:user.id ,name:user.name, email:user.email, role:{name:user.roles.name}});
     
     ctx.body = {
-        message:"Login Sucessful....",
+        message:"Success",
         user,
         Token:token
     }

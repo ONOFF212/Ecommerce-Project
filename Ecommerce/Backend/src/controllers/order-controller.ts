@@ -1,6 +1,6 @@
 import { Context } from "koa";
 
-import { checkOut, getOrderItems, getOrderItemsById, getOrderDetails, updateOrderStatus } from "../services/order-service.ts";
+import { checkOut, getOrderItems, getOrder,  getOrderItemsById, getOrderDetails, updateOrderStatus } from "../services/order-service.ts";
 
 import { OrderParams, OrderStatusSchema } from "../validators/order-validator.ts";
 import { OrderStatus } from "../entities/order-entity.ts";
@@ -11,21 +11,21 @@ export const createOrder = async(ctx:Context) => {
 
     if(!user || !user.id) {
         ctx.status = 404;
-        ctx.body= {message:"User Not found"};
+        ctx.body= {message:"Failed"};
         return;
     }
 
     const isOrder = await getOrderItems(user.id);
-    if(isOrder != null || isOrder === undefined) {
+    if(isOrder != null) {
         ctx.status = 400;
-        ctx.body ={message:"Order Already made"}
+        ctx.body ={message:"Failed"}
         return;
     }
 
     await checkOut(user.id);
     ctx.status = 201;
     ctx.body = {
-        message : "Order Created Successfully.....",
+        message : "Success",
         checkOut
     }
 };
@@ -34,14 +34,14 @@ export const viewOrderItems = async(ctx:Context) => {
 
     const {user} = ctx.state;
 
-    const isViewOrder = await getOrderItems(user.id);
+    const isViewOrder = await getOrder(user.id);
     if(!isViewOrder) {
-        ctx.body = {message:"Failed to fetch order Details"};
+        ctx.body = {message:"Failed"};
         return;
     }
     ctx.status = 200;
     ctx.body = {
-        message : "Order details Fetch done",
+        message : "Success",
         order:isViewOrder
     }
 };
@@ -54,7 +54,7 @@ export const viewOrderById = async(ctx:Context) => {
 
     ctx.status = 200;
     ctx.body = {
-        message : "Inside the single view routes ",
+        message : "Success",
         order:isOrderItems
     }
 };
@@ -64,7 +64,7 @@ export const adminViewOrder = async(ctx:Context) => {
 
     ctx.status = 200;
     ctx.body = {
-        message : "Order Details",
+        message : "Success",
         isOrderDetails
     }
 };
@@ -77,13 +77,13 @@ export const adminUpdateOrder = async(ctx:Context) => {
 
     if(isOrderUpdate.affected === 0) {
         ctx.status = 409;
-        ctx.body= {message:"Failed to Update status...."}
+        ctx.body= {message:"Failed"}
         return;
     }
 
     ctx.status = 200;
     ctx.body = {
-        message : "Updated Order status Succesfull",
+        message : "Success",
         isOrderUpdate
     }
 };

@@ -17,7 +17,7 @@ export const CreateRole = async (ctx:Context) =>{
 
     ctx.status = 201;
     ctx.body = {
-        message:"Role Created Successfully...."
+        message:"Success"
     }
 };
 
@@ -38,7 +38,7 @@ export const UpdateRole = async (ctx:Context) =>{
     
     ctx.status = 200;
     ctx.body = {
-        message:"Role Updated Succesful",
+        message:"Success",
         updateRole
     }
 
@@ -48,12 +48,12 @@ export const DeleteRole = async (ctx:Context) =>{
     const isDeleted = await deleteRole(ctx.params.id);
     if(isDeleted) {
         ctx.status = 200;
-        ctx.body = {message:"Role deleted"}
+        ctx.body = {message:"Success"}
         return;
     }
 
     ctx.status = 400
     ctx.body ={
-        message:"Failed to Delete Role . Try again...."
+        message:"Failed"
     }
 };         

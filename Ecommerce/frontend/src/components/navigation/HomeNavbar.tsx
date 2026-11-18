@@ -1,17 +1,56 @@
 
-
+'use client'
 import Link from "next/link";
+import { Group, Anchor, Box } from "@mantine/core";
+
+import { useAuth } from "@/contexts/auth/AuthContext";
 
 export default function Mainnavbar() {
+    const {isAuthenticated} = useAuth();
     return (
-        <div className=" flex items-center justify-center text-white">
-            <div className="font-bold gap-4 hover:text-blue-500">
-                <Link href="/">Home</Link>
-            </div>
-            <div className="flex gap-4 font-bold pl-4">
-                <Link href="/auth/register" className="hover:text-red-500 hover:text-black">Sign Up</Link>
-                <Link href="/auth/login" className="hover:text-red-500 hover:text-black">Log In</Link>
-            </div>
-        </div>
+        <>
+            {!isAuthenticated && (
+                <Box py="xs" px='md'>
+                    <Group justify="center" gap="xl">
+                        <Anchor
+                            component={Link}
+                            href='/'
+                            c="white"
+                            fw={700}
+                            size="lg"
+                            underline="never"
+                            className="!text-xl hover:!text-black transition-all duration-200"
+                        >
+                            Home
+                        </Anchor>
+
+                        <Anchor
+                            component={Link}
+                            href='/auth/register'
+                            c="white"
+                            fw={700}
+                            size="lg"
+                            underline="never"
+                            className="!text-xl hover:!text-black transition-all duration-200"
+                        >
+                            SignUp
+                        </Anchor>
+
+                        <Anchor
+                            component={Link}
+                            href='/auth/login'
+                            c="white"
+                            fw={700}
+                            size="lg"
+                            underline="never"
+                            className="!text-xl hover:!text-black transition-all duration-200"
+                        >
+                            Login
+                        </Anchor>
+
+                    </Group>
+                </Box>
+            )}
+        </>
     );
 };

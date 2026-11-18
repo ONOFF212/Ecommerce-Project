@@ -1,7 +1,7 @@
 
 import './auth-style.css';
 import type { ReactNode } from "react";
-import Mainnavbar from "@/components/navigations/MainNavbar";
+import Mainnavbar from "@/components/navigation/HomeNavbar";
 import { AuthProvider } from "@/contexts/auth/AuthContext";
 
 export default function AuthLayout({ children,}:{children:ReactNode}) {
@@ -16,13 +16,5 @@ export default function AuthLayout({ children,}:{children:ReactNode}) {
         </AuthProvider>
     </div>
     </div>
-      
-//       <div className="Auth-Container">
-//         <main>
-//           <AuthProvider>
-//             {children}
-//           </AuthProvider>
-//         </main>
-//     </div>
   );
 }

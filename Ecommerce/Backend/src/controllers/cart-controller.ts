@@ -12,7 +12,7 @@ export const addItem = async(ctx:Context) => {
    
    if(productId?.id !== validatedCartItem.product_id ) {
         ctx.status = 404;
-        ctx.body = {message:"No product Found...!"}
+        ctx.body = {message:"Failed"}
         return;
    }
 
@@ -21,7 +21,7 @@ export const addItem = async(ctx:Context) => {
    const cartId = await findCartByUserId(user.id);
    if(!cartId) {
         ctx.status = 404;
-        ctx.body = {message:"No Cart Found"}
+        ctx.body = {message:"Failed"}
         return;
    }
 
@@ -34,14 +34,14 @@ export const addItem = async(ctx:Context) => {
 
     if(!cartItem) {
         ctx.body = {
-            message:"Failed to save Cart items"
+            message:"Failed"
         }
         return;
     }
 
     ctx.status = 200;
     ctx.body = {
-        message:"Cart Items saved Done......"
+        message:"Success"
     }
 };
 
@@ -52,7 +52,7 @@ export const viewItems = async(ctx:Context) => {
     
     if(!isUserCart) {
         ctx.status = 404;
-        ctx.body = {message:"Cart Not Found...!"}
+        ctx.body = {message:"Failed"}
         return;
     }
     const userCart = await getCartItem(isUserCart.id);
@@ -62,7 +62,7 @@ export const viewItems = async(ctx:Context) => {
     }
 
     ctx.body = {
-        message : "User Cart , Cart Item::",
+        message : "Success",
         cart:userCart[0],
         num:userCart[1],
         address:isAddress
@@ -94,7 +94,7 @@ export const updateItem = async(ctx:Context) => {
 
     ctx.status = 200;
     ctx.body = {
-        message : "CartItem update successfull......",
+        message : "Success",
     }
 };
 
@@ -106,15 +106,9 @@ export const deleteItem = async(ctx:Context) => {
 
     const isItem = await getCartItemById(id);
 
-    if(!isUserCart) {
+    if (!isItem || !isUserCart){
         ctx.status = 404;
-        ctx.body = {message:"Failed to Delete  cart Items...!"}
-        return;
-    }
-
-    if (!isItem){
-        ctx.status = 404;
-        ctx.body = { message:"No item Found"};
+        ctx.body = { message:"Failed"};
         return;
     }
 
@@ -122,7 +116,7 @@ export const deleteItem = async(ctx:Context) => {
 
     ctx.status = 200;
     ctx.body = {
-        message : "Cart Item Deleted Successfull................."
+        message : "Success"
     }
 };
 
@@ -135,14 +129,14 @@ export const addAddress = async(ctx:Context) => {
     if(!isAddress) {
         ctx.status = 400;
         ctx.body = {
-            message:"Failed to save Address"
+            message:"Failed"
         }
         return;
     }
 
     ctx.status = 201;
     ctx.body = {
-        message:"Shipping Address saved",
+        message:"Success",
         data:isAddress
     }
 };
@@ -156,7 +150,7 @@ export const updateAddress = async(ctx:Context) => {
 
     ctx.status = 200;
     ctx.body = {
-        message : "CartItem update successfull......",
+        message : "Success",
         data:updateShippingAddress
     }
 };

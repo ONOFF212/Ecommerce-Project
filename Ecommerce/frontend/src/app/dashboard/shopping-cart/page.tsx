@@ -22,7 +22,7 @@ export default function ShoppingCart(){
     
     const {register,handleSubmit, formState:{errors},} = useForm<addressInput>({resolver:zodResolver(createAddressSchema), 
                                                                     defaultValues:{
-                                                                        province:"", 
+                                                                        province:address.province ?? "", 
                                                                         municipality:"", 
                                                                         local:"", 
                                                                         street:"",

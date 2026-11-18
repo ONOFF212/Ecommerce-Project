@@ -12,13 +12,13 @@ export const getUser =  async(ctx:Context) =>{
     if(!user){
         ctx.status = 404;
         ctx.body={
-            message:"User Not Found"
+            message:"Failed"
         }
         return;
     }
 
     ctx.body ={
-        message:"User Details Found",
+        message:"Success",
         user:{
             id:user.id,
             name:user.name,
@@ -38,7 +38,7 @@ export const updateUserDetails = async (ctx:Context) =>{
     if(!existingUser){
         ctx.status = 404;
         ctx.body={
-            message:"User Not Found"
+            message:"Failed"
         }
         return;
     }
@@ -49,7 +49,7 @@ export const updateUserDetails = async (ctx:Context) =>{
     const updatedUser = await findUserById(id);
 
     ctx.body = {
-        message:"User Details Updated Successfully",
+        message:"Success",
         user:{
             id:updatedUser?.id,
             name:updatedUser?.name,

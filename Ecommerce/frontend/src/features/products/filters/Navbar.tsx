@@ -3,7 +3,7 @@
 import { Box, Group, TextInput, ActionIcon, Text, Tooltip } from "@mantine/core";
 import { FiHeart, FiSearch, FiShoppingCart } from "react-icons/fi";
 import { useState } from "react";
-import Mainnavbar from '@/components/navigations/MainNavbar';
+import Mainnavbar from '@/components/navigation/HomeNavbar';
 import { useRouter } from "next/navigation";
 import { CartHooks } from "@/features/dashboard/shoppingCart/hooks/useCarts";
 

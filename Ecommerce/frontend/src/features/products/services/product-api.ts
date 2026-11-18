@@ -5,7 +5,7 @@ const productEndpoint = GET_PRODUCT_API;
 
 // export async  function getProducts() {
     
-//     const response = await fetch(`${APIURL}${routes}`);
+//     const response = await fetch(`${APIURL}`);
 
 //     if(!response.ok) {
 //         throw new Error(`HTTP Error! Status: ${response.status}`);

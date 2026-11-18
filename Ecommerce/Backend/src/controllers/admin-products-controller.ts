@@ -26,7 +26,7 @@ export const adminCreateProduct = async (ctx:Context) =>{
 
     ctx.status = 200;
     ctx.body={
-        message:"Product Added Successfully"
+        message:"Success"
     }
 };
 
@@ -43,7 +43,7 @@ export const getProducts = async (ctx:Context) =>{
 
     const products = await fetchProducts({search, category, sort, minPrice, maxPrice, page, limit});
     ctx.body={
-        message:"From search params: ",
+        message:"Success",
         products
     }
 };
@@ -54,7 +54,7 @@ export const getProductById = async (ctx:Context) =>{
 
      if(!product){
          return {
-             message:"Failed to Find the Product details"
+             message:"Failed"
          }
      }
      ctx.body = product;
@@ -70,6 +70,7 @@ export const adminUpdateProduct = async (ctx:Context) =>{
 
     ctx.status = 200;
     ctx.body = {
+        message:"Success",
         result:updatedProduct
     }
 
@@ -80,12 +81,12 @@ export const adminDeleteProduct = async (ctx:Context) =>{
     const isDeleted = await deleteProduct(ctx.params.id);
     if(isDeleted) {
         ctx.status = 200;
-        ctx.body = {message:"Product delete done..."}
+        ctx.body = {message:"Success"}
         return;
     }
 
     ctx.status = 404;
     ctx.body ={
-        message:"Failed to Delete Produt. Try again...."
+        message:"Failed"
     }
 };

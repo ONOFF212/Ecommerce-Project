@@ -6,6 +6,7 @@ import { Product } from "../entities/product-entity.ts";
 import { Order, OrderStatus } from "../entities/order-entity.ts";
 import { OrderItem } from "../entities/order-items-entity.ts";
 import { ShippingAddress } from "../entities/address-entity.ts";
+import { IsNull, Not } from "typeorm";
 
 const orderRepository =  AppDataSource.getRepository(Order);
 
@@ -131,8 +132,32 @@ export async function getOrderItems(user_id:number){
     })
 };
 
+export async function getOrder(user_id:number){
+    return await orderRepository.findOne({
+        withDeleted : true,
+        where:{
+            user:{
+                id:user_id,
+            },
+        },
+        relations:{
+            shipping_address:true,
+        },
+        select:{
+            id:true,
+            quantity:true,
+            order_items:true,
+            shipping_address:true,
+            order_date:true,
+            status:true,
+            total_amount:true,
+        },
+    })
+};
+
 export async function getOrderItemsById(user_id:number, id:number) {
     return await orderRepository.find({
+        withDeleted : true,
         where:{
             id,
             user:{
