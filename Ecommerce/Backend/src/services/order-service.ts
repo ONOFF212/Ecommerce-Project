@@ -134,7 +134,7 @@ export async function getOrderItems(user_id:number){
 
 export async function getOrder(user_id:number){
     return await orderRepository.findOne({
-        withDeleted : true,
+       
         where:{
             user:{
                 id:user_id,

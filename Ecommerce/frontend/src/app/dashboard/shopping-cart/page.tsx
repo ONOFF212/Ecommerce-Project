@@ -1,7 +1,7 @@
 
 'use client'
 import  {useRouter}  from "next/navigation";
-import { Card, Box, Text,Button,ScrollArea, Stack, Group, Grid, TextInput, Tooltip } from "@mantine/core";
+import { Card, Box, Text,Button,ScrollArea, Stack, Group, Grid, TextInput, Tooltip, Modal } from "@mantine/core";
 
 import { CartHooks } from "@/features/dashboard/shoppingCart/hooks/useCarts";
 import { CartList } from "@/features/dashboard/shoppingCart/components/cartItemsList";
@@ -14,15 +14,17 @@ import { TbReceiptDollar } from "react-icons/tb";
 import { MdOutlineLocalShipping } from "react-icons/md";
 
 import { createAddress, updateAddress } from "@/features/dashboard/shoppingCart/services/cart-api";
+import { useDisclosure } from "@mantine/hooks";
 
 
 export default function ShoppingCart(){
     const router =  useRouter();
+    const [showPopup, {open, close}] = useDisclosure(false);
     const {cartItems , num, subTotal, address, isLoading} = CartHooks();
     
     const {register,handleSubmit, formState:{errors},} = useForm<addressInput>({resolver:zodResolver(createAddressSchema), 
                                                                     defaultValues:{
-                                                                        province:address.province ?? "", 
+                                                                        province:"", 
                                                                         municipality:"", 
                                                                         local:"", 
                                                                         street:"",
@@ -52,7 +54,9 @@ export default function ShoppingCart(){
         router.push('/dashboard/shopping-cart/place-order');
     };
     const onSubmit = async(data:addressInput) => {
+        
         await createAddress(data);
+        open();
         router.refresh();
     };
 
@@ -88,7 +92,7 @@ export default function ShoppingCart(){
                         </Group>
                         <Group w="100%">
                             <ScrollArea h={500} w="100%" scrollbarSize={6}>
-                                {isLoading ? (
+                                {!isLoading ? (
                                     <CartList cartItem={cartItems}/>
                                 ):(
                                     <Box>
@@ -201,6 +205,12 @@ export default function ShoppingCart(){
                                     </Tooltip>
                                     )}
                                 </Group>
+                                <Modal opened={showPopup} onClose={close} title="Address saved Successfully!" centered size="sm" radius="md">
+                                    <Text size="sm" c="dimmed">Your address has been saved successfully</Text>
+                                    <Group justify="flex-end" mt="lg">
+                                        <Button color="green" onClick={close}>OK</Button>
+                                    </Group>
+                                </Modal>
                             </form>
                         </Stack>
                         <Box style={{borderBottom:'1px solid #e6e7e9', marginTop:10}}/>

@@ -24,7 +24,7 @@ export default function RootLayout({children} : {children:ReactNode}){
             <body className={dmSans.className}>
                 <MantineProvider theme={theme}>
                     <AuthProvider>
-                            {children}
+                        {children}
                     </AuthProvider>
                 </MantineProvider>
             </body>

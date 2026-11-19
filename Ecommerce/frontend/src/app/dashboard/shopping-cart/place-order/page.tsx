@@ -15,7 +15,7 @@ export default function PlaceOrderPage(){
             router.refresh();
         }
     };
-    const handleCancleAndUpdate = () => { router.push("/dashboard/orders"); };
+    const handleCancleAndUpdate = () => { router.push("/dashboard/shopping-cart"); };
     return(
         <>
         <Box>

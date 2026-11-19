@@ -119,7 +119,8 @@
     border-radius: 20px;
 }
 
-input, select{
+.form-container input,
+.form-container select{
     width:100%;
     padding: 8px;
     border:none;
@@ -131,10 +132,13 @@ input, select{
     margin-bottom:20px;
 }
 
-label, select, p, button{
+.form-container label,
+.form-container select,
+.form-container p,
+.form-container button{
     font-family: 'Inter', 'Poppins';
     font-weight: bold;
-}
+} 
 
 .edit-btne{
     width: 50%;
